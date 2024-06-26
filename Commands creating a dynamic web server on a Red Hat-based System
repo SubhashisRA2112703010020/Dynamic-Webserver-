@@ -1,0 +1,59 @@
+Commands creating a dynamic web server on a Red Hat-based System 
+1.	Install Red Hat Enterprise Linux: 
+   Install RHEL on your server. You'll need a valid RHEL subscription to access updates and packages. 
+ 
+2.	Update System Packages:    
+Ensure that your system packages are up to date:
+Command:
+   sudo yum update 
+    
+3. Install Apache HTTP Server:     Install the Apache web server: 
+Command: 
+sudo yum install httpd 
+    
+4. Start and Enable Apache: 
+   Start the Apache service and enable it to start on boot: 
+Command: 
+sudo systemctl start httpd    sudo systemctl enable httpd 
+    
+5. Install PHP: 
+   Install PHP and the PHP module for Apache: 
+Command: 
+sudo yum install php php-mysql 
+    
+         6. Create a Web Root Directory: 
+  Create a directory to host your web application files: 
+Command:
+sudo mkdir -p /var/www/html/your_project_directory 
+    
+7.	Set Permissions: 
+   Adjust permissions to allow the web server to access your project files:    sudo chown -R apache:apache /var/www/html/your_project_directory 
+    
+8.	Configure Apache: 
+   Create a configuration file for your web application, e.g., 
+`/etc/httpd/conf.d/your_project.conf`, and configure Apache to point to your    project directory. Edit the configuration file using a text editor: 
+Command:   
+sudo vi /etc/httpd/conf.d/your_project.conf    
+Add the following configuration: 
+   <VirtualHost *:80>        ServerName your_domain.com        DocumentRoot /var/www/html/your_project_directory    </VirtualHost> 
+   Save the file and exit the text editor. 
+ 
+9. Enable Firewall Rules: 
+   Allow incoming web traffic through the firewall:
+Command:
+sudo firewall-cmd --permanent --add-service=http    
+sudo firewall-cmd --reload 
+    
+10. Restart Apache: 
+    Reload the Apache configuration to apply your changes: 
+Command:    
+sudo systemctl restart httpd 
+     
+11.	Develop Your Web Application: 
+    Create and develop your web application within the `/var/www/html/your_project_directory` directory. 
+ 
+12.	Test Your Web Application: 
+    Access your web application in a web browser using the server's IP address or domain name. 
+ 
+
+  
